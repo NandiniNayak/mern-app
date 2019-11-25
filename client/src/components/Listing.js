@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios"
 import { Button, Input, Modal, Row, Col, Card} from 'antd';
+import {connect} from "react-redux";
+import {handleBlogs, handleDeletedBlog} from "../actions/blogAction";
 const {TextArea} = Input;
 const { Meta } = Card;
 
@@ -75,7 +77,7 @@ class Listing extends Component {
             .then(() => {
                 // instead of making a get request to fetch blogs again loop through the existing blogs in the state (App.js) and pass the blog that matches the id requested
                 // a callback method in App.js is called to remove the blog from existing blogs in the state
-                this.props.handledeletedBlog(blog._id);
+                this.props.handleDeletedBlog(blog._id);
             })
             .catch(console.log);
     };
@@ -132,4 +134,24 @@ class Listing extends Component {
         )
     }
 }
-export default Listing
+
+const mapStateToProps = (state) => ({
+    blogs: state.blogs
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    handleBlogs: blogs => dispatch(handleBlogs(blogs)),
+    handleDeletedBlog: id => dispatch(handleDeletedBlog(id))
+})
+
+// or 
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         handleBlogs: blogs => dispatch(handleBlogs(blogs)),
+//         handledeletedBlog: id => dispatch(handledeletedBlog(id))
+//     }
+// }
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Listing)

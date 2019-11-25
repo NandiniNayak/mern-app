@@ -10,32 +10,32 @@ const { Header, Footer, Content} = Layout;
 
 class App extends Component {
   // parent component holds the state, which is updated by both children form and Listing components
-  state = {
-    blogs: []
-  }
-  // method that gets called each time a new blog is added from the form component
-  handleNewBlog = (blog) => {
-    this.setState({
-      blogs: [...this.state.blogs, blog]
-    })
-  }
-  // method passed to Listing component, which get called when a get request is made to the server to retrieve all the blogs at the start of the app
-  handleBlogs = (blogs) => {
-    this.setState({blogs})
-  }
+  // state = {
+  //   blogs: []
+  // }
+  // // method that gets called each time a new blog is added from the form component
+  // handleNewBlog = (blog) => {
+  //   this.setState({
+  //     blogs: [...this.state.blogs, blog]
+  //   })
+  // }
+  // // method passed to Listing component, which get called when a get request is made to the server to retrieve all the blogs at the start of the app
+  // handleBlogs = (blogs) => {
+  //   this.setState({blogs})
+  // }
 
-  handledeletedBlog = id => {
-    // create a copy of the existing blogs array
-    const index = this.state.blogs.findIndex(blog => blog._id === id);
-    const blogs = [...this.state.blogs];
-    blogs.splice(index, 1);
-    this.setState({
-      blogs: blogs
-    });
-  };
+  // handledeletedBlog = id => {
+  //   // create a copy of the existing blogs array
+  //   const index = this.state.blogs.findIndex(blog => blog._id === id);
+  //   const blogs = [...this.state.blogs];
+  //   blogs.splice(index, 1);
+  //   this.setState({
+  //     blogs: blogs
+  //   });
+  // };
 
   render() {
-    const {blogs}= this.state
+    // const {blogs}= this.state
     return (
     <div className="App">
         <Layout className="layout">
@@ -54,14 +54,8 @@ class App extends Component {
           </Header>
           <Content style={{ padding: '0 50px' }}>
             <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-               <Form 
-                handleNewBlog={this.handleNewBlog}
-               />
-               <Listing 
-                blogs={blogs}
-                handleBlogs={this.handleBlogs}
-                handledeletedBlog={this.handledeletedBlog}
-                />
+               <Form />
+               <Listing />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center', position: 'sticky', bottom: "0" }}>Ant Design ©2018 Created by Ant UED</Footer>

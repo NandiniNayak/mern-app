@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Input} from "antd";
 // similar to fetch, its a promise based XHR library to make http requests
 import axios from "axios";
+import { connect } from 'react-redux'
+import {handleNewBlog} from "../actions/blogAction";
 
 const { TextArea } = Input;
 
@@ -64,4 +66,31 @@ class Form extends Component{
         )
     }
 }
-export default Form
+
+// subscribe to the redux state update
+const mapStateToProps = (state) => {
+    return {
+        blogs: state.blogs
+    }
+}
+
+// trigger an update to the redux state
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         handleNewBlog: blog => dispatch(handleNewBlog(blog))
+//     }
+// }
+
+// or
+
+const mapDispatchToProps = dispatch => ({
+        handleNewBlog: blog => dispatch(handleNewBlog(blog))
+})
+
+// const doSomething = () => ({
+//    something
+// })
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Form)
